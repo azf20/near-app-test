@@ -175,10 +175,10 @@ export default function App() {
             event.preventDefault();
 
             // get elements from the form using their id attribute
-            const { fieldset, greeting } = event.target.elements;
+            const { fieldset, globalGreeting } = event.target.elements;
 
             // hold onto new user-entered value from React's SynthenticEvent for use after `await` call
-            const newGreeting = greeting.value;
+            const newGreeting = globalGreeting.value;
 
             // disable the form while the value gets updated on-chain
             fieldset.disabled = true;

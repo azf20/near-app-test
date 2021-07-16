@@ -56859,66 +56859,68 @@ __exportStar(require("./common-index"), exports);
 require("error-polyfill");
 
 },{"./key_stores/browser-index":"../node_modules/near-api-js/lib/key_stores/browser-index.js","./common-index":"../node_modules/near-api-js/lib/common-index.js","error-polyfill":"../node_modules/error-polyfill/index.js"}],"config.js":[function(require,module,exports) {
-const CONTRACT_NAME = "dev-1620715926063-7803179" || 'near-app-test';
+const CONTRACT_NAME = "dev-1620715926063-7803179" || "greeter.adamedgeandnode.testnet";
 
 function getConfig(env) {
+  console.log(CONTRACT_NAME, env);
+
   switch (env) {
-    case 'production':
-    case 'mainnet':
+    case "production":
+    case "mainnet":
       return {
-        networkId: 'mainnet',
-        nodeUrl: 'https://rpc.mainnet.near.org',
+        networkId: "mainnet",
+        nodeUrl: "https://rpc.mainnet.near.org",
         contractName: CONTRACT_NAME,
-        walletUrl: 'https://wallet.near.org',
-        helperUrl: 'https://helper.mainnet.near.org',
-        explorerUrl: 'https://explorer.mainnet.near.org'
+        walletUrl: "https://wallet.near.org",
+        helperUrl: "https://helper.mainnet.near.org",
+        explorerUrl: "https://explorer.mainnet.near.org"
       };
 
-    case 'development':
-    case 'testnet':
+    case "development":
+    case "testnet":
       return {
-        networkId: 'testnet',
-        nodeUrl: 'https://rpc.testnet.near.org',
+        networkId: "testnet",
+        nodeUrl: "https://rpc.testnet.near.org",
         contractName: CONTRACT_NAME,
-        walletUrl: 'https://wallet.testnet.near.org',
-        helperUrl: 'https://helper.testnet.near.org',
-        explorerUrl: 'https://explorer.testnet.near.org'
+        walletUrl: "https://wallet.testnet.near.org",
+        helperUrl: "https://helper.testnet.near.org",
+        explorerUrl: "https://explorer.testnet.near.org"
       };
 
-    case 'betanet':
+    case "betanet":
       return {
-        networkId: 'betanet',
-        nodeUrl: 'https://rpc.betanet.near.org',
+        networkId: "betanet",
+        nodeUrl: "https://rpc.betanet.near.org",
         contractName: CONTRACT_NAME,
-        walletUrl: 'https://wallet.betanet.near.org',
-        helperUrl: 'https://helper.betanet.near.org',
-        explorerUrl: 'https://explorer.betanet.near.org'
+        walletUrl: "https://wallet.betanet.near.org",
+        helperUrl: "https://helper.betanet.near.org",
+        explorerUrl: "https://explorer.betanet.near.org"
       };
 
-    case 'local':
+    case "local":
       return {
-        networkId: 'local',
-        nodeUrl: 'http://localhost:3030',
+        networkId: "local",
+        nodeUrl: "http://localhost:3030",
         keyPath: `${"/Users/adamfuller"}/.near/validator_key.json`,
-        walletUrl: 'http://localhost:4000/wallet',
+        walletUrl: "http://localhost:4000/wallet",
         contractName: CONTRACT_NAME
       };
 
-    case 'test':
-    case 'ci':
+    case "test":
+    case "ci":
       return {
-        networkId: 'shared-test',
-        nodeUrl: 'https://rpc.ci-testnet.near.org',
+        networkId: "shared-test",
+        nodeUrl: "https://rpc.ci-testnet.near.org",
         contractName: CONTRACT_NAME,
-        masterAccount: 'test.near'
+        masterAccount: "test.near"
       };
 
-    case 'ci-betanet':
+    case "ci-betanet":
       return {
-        networkId: 'shared-test-staging',
-        nodeUrl: 'https://rpc.ci-betanet.near.org',
+        networkId: "shared-test-staging",
+        nodeUrl: "https://rpc.ci-betanet.near.org",
         contractName: CONTRACT_NAME,
-        masterAccount: 'test.near'
+        masterAccount: "test.near"
       };
 
     default:
@@ -56943,7 +56945,7 @@ var _config = _interopRequireDefault(require("./config"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const nearConfig = (0, _config.default)("development" || "development"); // Initialize contract & set global variables
+const nearConfig = (0, _config.default)("testnet"); // Initialize contract & set global variables
 
 async function initContract() {
   // Initialize connection to the NEAR testnet
@@ -56978,6 +56980,7 @@ function login() {
   // This works by creating a new access key for the user's account and storing
   // the private key in localStorage.
   window.walletConnection.requestSignIn(nearConfig.contractName);
+  console.log(nearConfig.contractName);
 }
 },{"near-api-js":"../node_modules/near-api-js/lib/browser-index.js","./config":"config.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
@@ -57213,10 +57216,10 @@ function App() {
 
         const {
           fieldset,
-          greeting
+          globalGreeting
         } = event.target.elements; // hold onto new user-entered value from React's SynthenticEvent for use after `await` call
 
-        const newGreeting = greeting.value; // disable the form while the value gets updated on-chain
+        const newGreeting = globalGreeting.value; // disable the form while the value gets updated on-chain
 
         fieldset.disabled = true;
 
@@ -57346,7 +57349,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53029" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49421" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

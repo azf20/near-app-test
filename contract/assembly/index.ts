@@ -65,13 +65,11 @@ export function setGlobalGreeting(message: string): MessageChange {
   logging.log(
     // String interpolation (`like ${this}`) is a work in progress:
     // https://github.com/AssemblyScript/assemblyscript/pull/1115
-    'Changing greeting from "' +
+    account_id +
+      'changed the global greeting from "' +
       old_message! +
       '" to "' +
-      message +
-      '" for account "' +
-      account_id +
-      '"'
+      message
   );
 
   const messageChange = new MessageChange(old_message, message, account_id);
