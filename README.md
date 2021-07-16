@@ -4,7 +4,8 @@ App available at https://soggy-bean.surge.sh/
 
 git clone https://github.com/azf20/near-app-test.git
 
-Contract: https://explorer.testnet.near.org/accounts/greeter.adamedgeandnode.testnet
+Live contract: https://explorer.testnet.near.org/accounts/greeter.adamedgeandnode.testnet
+_View the contract code at `/contract/assembly/index.ts`_
 
 Two contract calls:
 
