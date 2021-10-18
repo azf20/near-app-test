@@ -39,8 +39,8 @@ export function getGreeting(accountId: string): string | null {
 
 // Exported functions will be part of the public interface for your smart contract.
 // Feel free to extract behavior to non-exported functions!
-export function getGlobalGreeting(): string {
-  return GLOBAL_MESSAGE;
+export function getGlobalGreeting(): string | null {
+  return storage.get<string>("GLOBAL", GLOBAL_MESSAGE);
 }
 
 export function setGreeting(message: string): void {
@@ -60,7 +60,7 @@ export function setGlobalGreeting(message: string): MessageChange {
   const account_id = Context.sender;
   const old_message = getGlobalGreeting();
 
-  GLOBAL_MESSAGE = message;
+  storage.set("GLOBAL", message);
 
   logging.log(
     // String interpolation (`like ${this}`) is a work in progress:
@@ -72,7 +72,7 @@ export function setGlobalGreeting(message: string): MessageChange {
       message
   );
 
-  const messageChange = new MessageChange(old_message, message, account_id);
+  const messageChange = new MessageChange(old_message!, message, account_id);
 
   return messageChange;
 }
