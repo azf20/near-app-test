@@ -1,5 +1,4 @@
-const CONTRACT_NAME =
-  process.env.CONTRACT_NAME || "greeter.adamedgeandnode.testnet";
+const CONTRACT_NAME = process.env.CONTRACT_NAME || "app.good-morning.testnet";
 
 function getConfig(env) {
   console.log(CONTRACT_NAME, env);
