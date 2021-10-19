@@ -36,9 +36,11 @@ export default function App() {
   return (
     // use React Fragment, <>, to avoid wrapping elements in unnecessary divs
     <>
-      <button className="link" style={{ float: "right" }} onClick={logout}>
-        {`Sign out ${window.accountId}`}
-      </button>
+      {window.walletConnection.isSignedIn() && (
+        <button className="link" style={{ float: "right" }} onClick={logout}>
+          {`Sign out ${window.accountId}`}
+        </button>
+      )}
       <main>
         <h1>
           <label
