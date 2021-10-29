@@ -1,7 +1,7 @@
-const CONTRACT_NAME = process.env.CONTRACT_NAME || "app.good-morning.testnet";
+const CONTRACT_NAME = process.env.CONTRACT_NAME || "app.good-morning.near";
 
 function getConfig(env) {
-  console.log(CONTRACT_NAME, env);
+  console.log(CONTRACT_NAME, env, process.env.CONTRACT_NAME);
   switch (env) {
     case "production":
     case "mainnet":

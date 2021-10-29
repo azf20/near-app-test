@@ -2,9 +2,10 @@ import "regenerator-runtime/runtime";
 import React from "react";
 import { login, logout } from "./utils";
 import "./global.css";
+import { gql, useQuery } from "@apollo/client";
 
 import getConfig from "./config";
-const { networkId } = getConfig(process.env.NODE_ENV || "development");
+const { networkId } = getConfig(process.env.NODE_ENV);
 
 export default function App() {
   const [greeter, setGreeter] = React.useState("...");
@@ -31,7 +32,30 @@ export default function App() {
     [showNotification]
   );
 
-  console.log(process.env.NODE_ENV, process.env.CONTRACT_NAME);
+  const EXAMPLE_GRAPHQL = `
+  {
+    greeters {
+      id
+      greetings { id }
+  }
+  }
+`;
+  const EXAMPLE_GQL = gql(EXAMPLE_GRAPHQL);
+  const { loading, data } = useQuery(EXAMPLE_GQL, { pollInterval: 5000 });
+
+  const greeters =
+    data &&
+    data.greeters &&
+    [...data.greeters]
+      .sort(function(a, b) {
+        return b.greetings.length - a.greetings.length;
+      })
+      .map(greeter => (
+        <p style={{ textAlign: "center" }} key={greeter.id}>
+          <a>{greeter.id}</a>
+          {` ${greeter.greetings.length}`}
+        </p>
+      ));
 
   return (
     // use React Fragment, <>, to avoid wrapping elements in unnecessary divs
@@ -100,13 +124,32 @@ export default function App() {
             </button>
           </div>
         )}
+        <h3 style={{ textAlign: "center" }}>Leaderboard</h3>
+        <ul style={{ padding: "0" }}>{greeters}</ul>
+        <hr />
         <p style={{ textAlign: "center" }}>
           <a
             target="_blank"
             rel="noreferrer"
-            href="https://github.com/azf20/near-app-test"
+            href={`https://explorer.near.org/accounts/${process.env.CONTRACT_NAME}`}
+          >
+            Contract
+          </a>
+          <span>{" / "}</span>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://github.com/azf20/near-app-test/tree/gm-near"
           >
             Github
+          </a>
+          <span>{" / "}</span>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://thegraph.com/hosted-service/subgraph/azf20/good-morning-near?selected=playground"
+          >
+            Subgraph
           </a>
         </p>
       </main>

@@ -25,7 +25,7 @@ getGreeter(): string | null {
 export function sayGm(): void {
   const account_id = Context.sender;
 
-  logging.log('{"greeter": "' + account_id + '" }');
+  logging.log('{"greeter": "' + account_id + '"}');
 
   storage.set("Greeter", account_id);
 }
